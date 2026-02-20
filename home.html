@@ -92,6 +92,12 @@ nav{
   margin-top:20px;background:var(--green);color:#000;
   border-radius:30px;padding:14px 20px;text-align:center;border:none;
 }
+.mobile-drawer a.drawer-sub{
+  font-size:15px;font-weight:600;color:#666;
+  padding:9px 0 9px 18px;border-bottom:1px solid rgba(0,255,136,0.04);
+  letter-spacing:0.5px;
+}
+.mobile-drawer a.drawer-sub:hover{color:#aaa;padding-left:24px;}
 .drawer-overlay{
   position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1040;
   opacity:0;pointer-events:none;transition:opacity 0.35s;
@@ -398,10 +404,8 @@ footer span{color:var(--green);}
 </head>
 <body>
 
-<!-- Background Video -->
-<video class="bg-video" autoplay muted loop playsinline>
-  <source src="https://cdn.discordapp.com/attachments/929318236057657395/1474355640771149834/bg.mp4?ex=69998c30&is=69983ab0&hm=f903678425fccacde9630564521074a3f8b1f65c3882c90716495aab1df10067&" type="video/mp4">
-</video>
+<!-- Background GIF -->
+<div class="bg-video" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:-3;opacity:0.22;pointer-events:none;background:url('https://cdn.discordapp.com/attachments/1473719021466681528/1474384426992537817/4d4b5213f1afd50f0dbf41e40f43402f.gif?ex=6999a700&is=69985580&hm=85d010c87fe62451e2bf5482fe826ed6d9ef101f7b9d433ae58ae0b64f75cdb5&') center/cover no-repeat;"></div>
 
 <div id="progress"></div>
 
@@ -426,6 +430,10 @@ footer span{color:var(--green);}
 <div class="mobile-drawer" id="mobileDrawer">
   <a href="#" onclick="toggleDrawer()">🏠 Home</a>
   <a href="#projects" onclick="toggleDrawer()">📁 Projects</a>
+  <a href="endernode.html" onclick="toggleDrawer()" class="drawer-sub">⚡ EnderNode</a>
+  <a href="corenode.html" onclick="toggleDrawer()" class="drawer-sub">🧠 CoreNode</a>
+  <a href="flarebyte-project.html" onclick="toggleDrawer()" class="drawer-sub">🔥 FlareByte</a>
+  <a href="farebaren.html" onclick="toggleDrawer()" class="drawer-sub">🇩🇪 FareBaren</a>
   <a href="#team-section" onclick="toggleDrawer()">👥 Team</a>
   <a href="plans.html" onclick="toggleDrawer()">💰 Plans</a>
   <a href="https://discord.gg/SqUWw4Cgt7" target="_blank" onclick="toggleDrawer()">📬 Contact</a>
@@ -477,6 +485,7 @@ footer span{color:var(--green);}
       <div class="ht-staff"><div class="ht-dot"></div><span>atkillerninja</span></div>
       <div class="ht-staff"><div class="ht-dot"></div><span>nickmoiahihi</span></div>
       <div class="ht-staff"><div class="ht-dot"></div><span>Plaze</span></div>
+      <div class="ht-staff"><div class="ht-dot"></div><span>Yash</span></div>
     </div>
 
   </div>
@@ -583,8 +592,8 @@ footer span{color:var(--green);}
     </div>
 
     <div class="staff-card">
-      <div class="staff-avatar">Pl</div>
-      <div class="staff-name">Plaze</div>
+      <div class="staff-avatar">Ya</div>
+      <div class="staff-name">Yash</div>
       <div class="staff-role">STAFF</div>
     </div>
 

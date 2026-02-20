@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leaf Studio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Outfit',sans-serif;
+}
+
+body{
+overflow:hidden;
+color:#fff;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+background:#000;
+transition:opacity 1s ease;
+}
+
+/* ===== Background Video ===== */
+video{
+position:fixed;
+right:0;
+bottom:0;
+min-width:100%;
+min-height:100%;
+object-fit:cover;
+z-index:-2;
+}
+
+/* Dark Overlay */
+.overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.65);
+z-index:-1;
+backdrop-filter:blur(2px);
+}
+
+/* Logo */
+.logo{
+width:150px;
+height:150px;
+border-radius:50%;
+overflow:hidden;
+box-shadow:0 0 60px #00ff88;
+animation:float 3s ease-in-out infinite;
+}
+
+.logo img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+@keyframes float{
+0%{transform:translateY(0px);}
+50%{transform:translateY(-15px);}
+100%{transform:translateY(0px);}
+}
+
+/* Title */
+h1{
+margin-top:30px;
+font-size:48px;
+letter-spacing:3px;
+animation:fadeIn 2s ease forwards;
+opacity:0;
+}
+
+@keyframes fadeIn{
+to{opacity:1;}
+}
+
+/* View Button */
+.view-btn{
+position:absolute;
+bottom:50px;
+padding:15px 60px;
+border:2px solid #00ff88;
+border-radius:50px;
+color:#00ff88;
+cursor:pointer;
+transition:0.4s;
+background:transparent;
+font-weight:600;
+letter-spacing:2px;
+animation:glow 2s infinite alternate;
+}
+
+.view-btn:hover{
+background:#00ff88;
+color:#000;
+box-shadow:0 0 40px #00ff88;
+transform:scale(1.05);
+}
+
+@keyframes glow{
+from{box-shadow:0 0 15px #00ff88;}
+to{box-shadow:0 0 60px #00ff88;}
+}
+
+/* Click to enable sound notice */
+.sound-notice{
+position:absolute;
+top:20px;
+font-size:12px;
+opacity:0.6;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Background Video -->
+<video autoplay muted loop playsinline>
+<source src="bg.mp4" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+
+<div class="logo">
+<img src="https://cdn.discordapp.com/attachments/929318236057657395/1474350361492848717/leaf.png?ex=69998746&is=699835c6&hm=dc7730a08c7eed9bd27417337ddd0758e2f97007a12a1f47e5fc179fffd32f45&" alt="Leaf Studio Logo">
+</div>
+
+<h1>Leaf Studio</h1>
+
+<div class="sound-notice">Tap anywhere if sound doesn't start</div>
+
+<button class="view-btn" onclick="enterSite()">View</button>
+
+<!-- Background Sound -->
+<audio id="bgSound" autoplay loop>
+<source src="sound.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const sound = document.getElementById("bgSound");
+
+/* Some browsers block autoplay with sound */
+document.body.addEventListener("click", function(){
+sound.play();
+});
+
+/* Enter Site */
+function enterSite(){
+document.body.style.opacity="0";
+setTimeout(()=>{
+window.location.href="home.html";
+},1000);
+}
+</script>
+
+</body>
+</html>
