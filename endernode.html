@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EnderNode — Built by Leaf Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'DM Sans',sans-serif;}
+:root{--green:#00ff88;--bg:#050b07;--bg2:#08110c;--border:rgba(0,255,136,0.15);--accent:#7c3aed;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:#fff;overflow-x:hidden;}
+body::before{content:"";position:fixed;inset:0;background:linear-gradient(#00ff2208 1px,transparent 1px),linear-gradient(90deg,#00ff2208 1px,transparent 1px);background-size:40px 40px;z-index:-1;}
+
+nav{display:flex;justify-content:space-between;align-items:center;padding:18px 8%;position:fixed;width:100%;background:rgba(5,11,7,0.92);backdrop-filter:blur(16px);z-index:1000;border-bottom:1px solid var(--border);}
+.nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.nav-logo{width:34px;height:34px;object-fit:contain;border-radius:50%;}
+.nav-brand h1{color:var(--green);font-family:'Syne',sans-serif;font-weight:800;font-size:18px;letter-spacing:1px;}
+.nav-back{color:#777;text-decoration:none;font-size:13px;font-weight:500;transition:color 0.2s;display:flex;align-items:center;gap:6px;}
+.nav-back:hover{color:var(--green);}
+
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:120px 8% 80px;position:relative;}
+.back-arrow{position:absolute;top:100px;left:8%;font-size:13px;color:#555;text-decoration:none;display:flex;align-items:center;gap:6px;transition:color 0.2s;}
+.back-arrow:hover{color:var(--green);}
+.project-badge{display:inline-flex;align-items:center;gap:10px;padding:7px 20px;border:1px solid var(--border);border-radius:30px;font-size:11px;color:var(--green);letter-spacing:2px;margin-bottom:30px;background:rgba(0,255,136,0.04);}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(50px,9vw,90px);font-weight:800;line-height:1;margin-bottom:16px;color:#fff;}
+.hero h1 span{color:var(--green);}
+.hero-sub{font-size:16px;color:#555;max-width:560px;line-height:1.8;margin-bottom:44px;}
+.project-logo{width:120px;height:120px;object-fit:contain;border-radius:24px;margin-bottom:28px;border:2px solid var(--border);box-shadow:0 0 50px rgba(0,255,136,0.2);}
+.hero-stats{display:flex;gap:48px;flex-wrap:wrap;justify-content:center;padding-top:40px;border-top:1px solid var(--border);width:100%;max-width:600px;}
+.hs{text-align:center;}
+.hs h3{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--green);}
+.hs p{font-size:11px;color:#444;margin-top:4px;letter-spacing:2px;}
+
+section{padding:90px 8%;max-width:1200px;margin:0 auto;}
+.s-label{font-size:10px;letter-spacing:4px;color:var(--green);text-transform:uppercase;font-weight:700;margin-bottom:12px;}
+.s-title{font-family:'Syne',sans-serif;font-size:clamp(26px,4vw,40px);font-weight:800;color:#fff;margin-bottom:20px;}
+.s-title span{color:var(--green);}
+.s-body{font-size:15px;color:#555;line-height:1.9;max-width:700px;}
+
+.cards-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;margin-top:40px;}
+.detail-card{background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:20px;padding:30px 26px;transition:0.3s;}
+.detail-card:hover{border-color:rgba(0,255,136,0.3);transform:translateY(-5px);}
+.dc-icon{font-size:28px;margin-bottom:14px;}
+.dc-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:8px;}
+.dc-body{font-size:13px;color:#555;line-height:1.7;}
+
+.tech-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px;}
+.tech-pill{padding:6px 16px;border-radius:30px;font-size:12px;font-weight:600;background:rgba(0,255,136,0.06);border:1px solid rgba(0,255,136,0.18);color:var(--green);letter-spacing:0.5px;}
+
+.timeline{display:flex;flex-direction:column;gap:0;margin-top:40px;max-width:700px;}
+.tl-item{display:flex;gap:24px;position:relative;}
+.tl-item:not(:last-child)::before{content:"";position:absolute;left:9px;top:22px;width:1px;height:100%;background:rgba(0,255,136,0.12);}
+.tl-dot{width:20px;height:20px;border-radius:50%;border:2px solid var(--green);background:var(--bg);flex-shrink:0;margin-top:2px;}
+.tl-content{padding-bottom:36px;}
+.tl-phase{font-size:10px;color:var(--green);letter-spacing:3px;font-weight:700;text-transform:uppercase;margin-bottom:6px;}
+.tl-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:6px;}
+.tl-desc{font-size:13px;color:#555;line-height:1.7;}
+
+.cta-band{background:rgba(0,255,136,0.04);border:1px solid var(--border);border-radius:28px;padding:60px 50px;text-align:center;margin:80px 8%;display:flex;flex-direction:column;align-items:center;gap:20px;}
+.cta-band h2{font-family:'Syne',sans-serif;font-size:30px;font-weight:800;color:#fff;}
+.cta-band p{font-size:14px;color:#555;max-width:460px;line-height:1.8;}
+.btn-g{padding:13px 36px;background:var(--green);color:#000;border-radius:40px;font-weight:700;font-size:14px;text-decoration:none;transition:0.3s;display:inline-block;}
+.btn-g:hover{box-shadow:0 0 35px rgba(0,255,136,0.4);transform:translateY(-2px);}
+.btn-outline{padding:13px 36px;background:transparent;color:var(--green);border:2px solid var(--green);border-radius:40px;font-weight:600;font-size:14px;text-decoration:none;transition:0.3s;display:inline-block;}
+.btn-outline:hover{background:rgba(0,255,136,0.07);}
+.btn-row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;}
+
+footer{text-align:center;padding:32px;border-top:1px solid var(--border);font-size:12px;color:#333;}
+footer span{color:var(--green);}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="home.html" class="nav-brand">
+    <img src="https://cdn.discordapp.com/attachments/929318236057657395/1474350361492848717/leaf.png?ex=69998746&is=699835c6&hm=dc7730a08c7eed9bd27417337ddd0758e2f97007a12a1f47e5fc179fffd32f45&" class="nav-logo" alt="Leaf">
+    <h1>Leaf Studio</h1>
+  </a>
+  <a href="home.html" class="nav-back">← Back to Home</a>
+</nav>
+
+<div class="hero">
+  <a href="home.html" class="back-arrow">← All Projects</a>
+  <div class="project-badge">⚡ CLIENT PROJECT · VPS & PANEL</div>
+  <img src="https://cdn.discordapp.com/attachments/1473719021466681528/1474367113010483292/d6bc1f711ee8f7ade621be4ca7658abe.webp?ex=699996e0&is=69984560&hm=df21a00696ceab2c820909027b1b5ad4a63af945beb2869058333b31115d474c&" alt="EnderNode Logo" class="project-logo">
+  <h1>Ender<span>Node</span></h1>
+  <p class="hero-sub">A full-scale VPS infrastructure and custom control panel built by Leaf Studio for EnderNode — engineered for performance, reliability, and ease of use.</p>
+  <div class="hero-stats">
+    <div class="hs"><h3>99.9%</h3><p>UPTIME SLA</p></div>
+    <div class="hs"><h3>&lt;20ms</h3><p>PANEL RESPONSE</p></div>
+    <div class="hs"><h3>100%</h3><p>CUSTOM BUILT</p></div>
+  </div>
+</div>
+
+<section>
+  <div class="s-label">Overview</div>
+  <h2 class="s-title">What We <span>Built</span></h2>
+  <p class="s-body">EnderNode needed a complete VPS hosting infrastructure from scratch — not just a reseller panel, but a real, owned stack. Leaf Studio designed and deployed the full environment: server provisioning logic, resource quota management, a branded client-facing control panel, and automated billing hooks. The result is a seamless, fast, and stable platform that EnderNode operates independently.</p>
+  <div class="cards-3">
+    <div class="detail-card"><div class="dc-icon">🖥️</div><div class="dc-title">VPS Infrastructure</div><div class="dc-body">Set up hypervisor-level VM provisioning with automated resource allocation, storage limits, and IP assignment pipelines for instant deployment.</div></div>
+    <div class="detail-card"><div class="dc-icon">🎛️</div><div class="dc-title">Custom Control Panel</div><div class="dc-body">Designed and developed a branded, fast-loading client panel. Clients can start/stop servers, view stats, manage files, and open tickets — all from one dashboard.</div></div>
+    <div class="detail-card"><div class="dc-icon">💳</div><div class="dc-title">Billing Integration</div><div class="dc-body">Integrated automated billing hooks that sync plan renewals, suspend unpaid servers, and generate invoices — linked directly to the control panel account system.</div></div>
+    <div class="detail-card"><div class="dc-icon">🛡️</div><div class="dc-title">DDoS Mitigation</div><div class="dc-body">Configured network-level DDoS protection, traffic filtering rules, and rate limiting to keep hosted VPS environments stable under attack scenarios.</div></div>
+    <div class="detail-card"><div class="dc-icon">📊</div><div class="dc-title">Resource Monitoring</div><div class="dc-body">Built real-time CPU, RAM, and bandwidth usage dashboards so clients always know their current utilization and admins can spot issues early.</div></div>
+    <div class="detail-card"><div class="dc-icon">🔔</div><div class="dc-title">Alert & Ticket System</div><div class="dc-body">Integrated automated alerts for server down events and a Discord-connected ticket system for instant client support routing.</div></div>
+  </div>
+</section>
+
+<section>
+  <div class="s-label">Tech Stack</div>
+  <h2 class="s-title">Tools & <span>Technologies</span></h2>
+  <p class="s-body">Every layer of the stack was hand-picked for performance and long-term maintainability.</p>
+  <div class="tech-row">
+    <span class="tech-pill">Linux (Ubuntu)</span>
+    <span class="tech-pill">KVM / Virtualization</span>
+    <span class="tech-pill">Node.js</span>
+    <span class="tech-pill">Express</span>
+    <span class="tech-pill">MySQL</span>
+    <span class="tech-pill">WHMCS</span>
+    <span class="tech-pill">Nginx</span>
+    <span class="tech-pill">iptables</span>
+    <span class="tech-pill">Discord.js</span>
+    <span class="tech-pill">Cloudflare</span>
+    <span class="tech-pill">SSL / TLS</span>
+  </div>
+</section>
+
+<section>
+  <div class="s-label">Build Process</div>
+  <h2 class="s-title">How We <span>Delivered It</span></h2>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content"><div class="tl-phase">Phase 01</div><div class="tl-title">Discovery & Architecture</div><div class="tl-desc">Mapped out EnderNode's requirements — target server regions, client capacity, plan tiers, and the panel feature set. Designed the system architecture before writing a single line of code.</div></div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content"><div class="tl-phase">Phase 02</div><div class="tl-title">Infrastructure Setup</div><div class="tl-desc">Provisioned and hardened the host node. Configured KVM virtualization, networking, firewall rules, and the base OS environment across all server locations.</div></div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content"><div class="tl-phase">Phase 03</div><div class="tl-title">Control Panel Development</div><div class="tl-desc">Built the full client-facing panel from scratch — authentication, VM controls, file manager, stats graphs, and support ticket flow.</div></div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content"><div class="tl-phase">Phase 04</div><div class="tl-title">Billing & Automation</div><div class="tl-desc">Integrated billing hooks, invoice generation, automated suspension/reactivation, and plan upgrade flows tied to the panel account system.</div></div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content"><div class="tl-phase">Phase 05</div><div class="tl-title">Testing & Handoff</div><div class="tl-desc">Ran stress tests, simulated attacks, tested edge cases, then handed off with full documentation and a 7-day post-launch support window.</div></div></div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <h2>Want something like this?</h2>
+  <p>Leaf Studio builds full infrastructure, panels, and systems for hosting providers. Let's talk.</p>
+  <div class="btn-row">
+    <a href="https://discord.gg/SqUWw4Cgt7" target="_blank" class="btn-g">Start a Project</a>
+    <a href="home.html#projects" class="btn-outline">See Other Work</a>
+  </div>
+</div>
+
+<footer><span>🌿 Leaf Studio</span> — Built EnderNode's entire stack. © 2026</footer>
+
+</body>
+</html>

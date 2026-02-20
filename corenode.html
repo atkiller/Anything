@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CoreNode — Built by Leaf Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'DM Sans',sans-serif;}
+:root{--green:#00ff88;--bg:#050b07;--bg2:#08110c;--border:rgba(0,255,136,0.15);}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:#fff;overflow-x:hidden;}
+body::before{content:"";position:fixed;inset:0;background:linear-gradient(#00ff2208 1px,transparent 1px),linear-gradient(90deg,#00ff2208 1px,transparent 1px);background-size:40px 40px;z-index:-1;}
+nav{display:flex;justify-content:space-between;align-items:center;padding:18px 8%;position:fixed;width:100%;background:rgba(5,11,7,0.92);backdrop-filter:blur(16px);z-index:1000;border-bottom:1px solid var(--border);}
+.nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.nav-logo{width:34px;height:34px;object-fit:contain;border-radius:50%;}
+.nav-brand h1{color:var(--green);font-family:'Syne',sans-serif;font-weight:800;font-size:18px;}
+.nav-back{color:#777;text-decoration:none;font-size:13px;font-weight:500;transition:color 0.2s;display:flex;align-items:center;gap:6px;}
+.nav-back:hover{color:var(--green);}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:120px 8% 80px;position:relative;}
+.back-arrow{position:absolute;top:100px;left:8%;font-size:13px;color:#555;text-decoration:none;display:flex;align-items:center;gap:6px;transition:color 0.2s;}
+.back-arrow:hover{color:var(--green);}
+.project-badge{display:inline-flex;align-items:center;gap:10px;padding:7px 20px;border:1px solid var(--border);border-radius:30px;font-size:11px;color:var(--green);letter-spacing:2px;margin-bottom:30px;background:rgba(0,255,136,0.04);}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(50px,9vw,90px);font-weight:800;line-height:1;margin-bottom:16px;color:#fff;}
+.hero h1 span{color:var(--green);}
+.hero-sub{font-size:16px;color:#555;max-width:560px;line-height:1.8;margin-bottom:44px;}
+.project-logo{width:120px;height:120px;object-fit:contain;border-radius:24px;margin-bottom:28px;border:2px solid var(--border);box-shadow:0 0 50px rgba(0,255,136,0.2);}
+.hero-stats{display:flex;gap:48px;flex-wrap:wrap;justify-content:center;padding-top:40px;border-top:1px solid var(--border);width:100%;max-width:600px;}
+.hs{text-align:center;}
+.hs h3{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--green);}
+.hs p{font-size:11px;color:#444;margin-top:4px;letter-spacing:2px;}
+section{padding:90px 8%;max-width:1200px;margin:0 auto;}
+.s-label{font-size:10px;letter-spacing:4px;color:var(--green);text-transform:uppercase;font-weight:700;margin-bottom:12px;}
+.s-title{font-family:'Syne',sans-serif;font-size:clamp(26px,4vw,40px);font-weight:800;color:#fff;margin-bottom:20px;}
+.s-title span{color:var(--green);}
+.s-body{font-size:15px;color:#555;line-height:1.9;max-width:700px;}
+.cards-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;margin-top:40px;}
+.detail-card{background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:20px;padding:30px 26px;transition:0.3s;}
+.detail-card:hover{border-color:rgba(0,255,136,0.3);transform:translateY(-5px);}
+.dc-icon{font-size:28px;margin-bottom:14px;}
+.dc-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:8px;}
+.dc-body{font-size:13px;color:#555;line-height:1.7;}
+.tech-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px;}
+.tech-pill{padding:6px 16px;border-radius:30px;font-size:12px;font-weight:600;background:rgba(0,255,136,0.06);border:1px solid rgba(0,255,136,0.18);color:var(--green);}
+.timeline{display:flex;flex-direction:column;gap:0;margin-top:40px;max-width:700px;}
+.tl-item{display:flex;gap:24px;position:relative;}
+.tl-item:not(:last-child)::before{content:"";position:absolute;left:9px;top:22px;width:1px;height:100%;background:rgba(0,255,136,0.12);}
+.tl-dot{width:20px;height:20px;border-radius:50%;border:2px solid var(--green);background:var(--bg);flex-shrink:0;margin-top:2px;}
+.tl-content{padding-bottom:36px;}
+.tl-phase{font-size:10px;color:var(--green);letter-spacing:3px;font-weight:700;text-transform:uppercase;margin-bottom:6px;}
+.tl-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:6px;}
+.tl-desc{font-size:13px;color:#555;line-height:1.7;}
+.cta-band{background:rgba(0,255,136,0.04);border:1px solid var(--border);border-radius:28px;padding:60px 50px;text-align:center;margin:80px 8%;display:flex;flex-direction:column;align-items:center;gap:20px;}
+.cta-band h2{font-family:'Syne',sans-serif;font-size:30px;font-weight:800;color:#fff;}
+.cta-band p{font-size:14px;color:#555;max-width:460px;line-height:1.8;}
+.btn-g{padding:13px 36px;background:var(--green);color:#000;border-radius:40px;font-weight:700;font-size:14px;text-decoration:none;transition:0.3s;display:inline-block;}
+.btn-g:hover{box-shadow:0 0 35px rgba(0,255,136,0.4);transform:translateY(-2px);}
+.btn-outline{padding:13px 36px;background:transparent;color:var(--green);border:2px solid var(--green);border-radius:40px;font-weight:600;font-size:14px;text-decoration:none;transition:0.3s;display:inline-block;}
+.btn-outline:hover{background:rgba(0,255,136,0.07);}
+.btn-row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;}
+footer{text-align:center;padding:32px;border-top:1px solid var(--border);font-size:12px;color:#333;}
+footer span{color:var(--green);}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="home.html" class="nav-brand">
+    <img src="https://cdn.discordapp.com/attachments/929318236057657395/1474350361492848717/leaf.png?ex=69998746&is=699835c6&hm=dc7730a08c7eed9bd27417337ddd0758e2f97007a12a1f47e5fc179fffd32f45&" class="nav-logo" alt="Leaf">
+    <h1>Leaf Studio</h1>
+  </a>
+  <a href="home.html" class="nav-back">← Back to Home</a>
+</nav>
+
+<div class="hero">
+  <a href="home.html" class="back-arrow">← All Projects</a>
+  <div class="project-badge">🧠 CLIENT PROJECT · BILLING & BOT</div>
+  <img src="https://cdn.discordapp.com/attachments/1473719021466681528/1474367113996275732/97b80f402ee45a8d339db0678b7f7eb0_1.webp?ex=699996e0&is=69984560&hm=3b7e677190422aeaf7d3f89cf9a872ceab60e77fb295cdce135bc26446e083d4&" alt="CoreNode Logo" class="project-logo">
+  <h1>Core<span>Node</span></h1>
+  <p class="hero-sub">A comprehensive billing platform and Discord bot system built by Leaf Studio for CoreNode — combining full-stack web development with powerful automation.</p>
+  <div class="hero-stats">
+    <div class="hs"><h3>2-in-1</h3><p>WEB + BOT</p></div>
+    <div class="hs"><h3>Auto</h3><p>RENEWALS</p></div>
+    <div class="hs"><h3>Multi</h3><p>PLAN SUPPORT</p></div>
+  </div>
+</div>
+
+<section>
+  <div class="s-label">Overview</div>
+  <h2 class="s-title">What We <span>Built</span></h2>
+  <p class="s-body">CoreNode required two interconnected systems: a professional billing website that handles their entire client lifecycle — from signup to invoice to renewal — and a Discord bot that mirrors and automates that same flow directly in their community server. Both systems talk to each other in real time, giving CoreNode's team full visibility and control from Discord without ever touching a dashboard.</p>
+  <div class="cards-3">
+    <div class="detail-card"><div class="dc-icon">💰</div><div class="dc-title">Billing Website</div><div class="dc-body">Custom-built billing platform with plan selection, invoice generation, payment tracking, client portal, and admin management dashboard — fully branded for CoreNode.</div></div>
+    <div class="detail-card"><div class="dc-icon">🤖</div><div class="dc-title">Discord Bot</div><div class="dc-body">Feature-rich bot handling ticket creation, plan status checks, renewal reminders, payment verification, auto-role on purchase, and admin commands.</div></div>
+    <div class="detail-card"><div class="dc-icon">🔄</div><div class="dc-title">Auto-Renewal System</div><div class="dc-body">Automated renewal pipeline that sends reminders, processes payments, extends subscriptions, and handles grace periods and suspensions without manual admin work.</div></div>
+    <div class="detail-card"><div class="dc-icon">🎫</div><div class="dc-title">Ticket & Support Flow</div><div class="dc-body">Structured ticket system with categories, priority routing, transcript saving, and auto-close. Staff can manage all support directly from Discord channels.</div></div>
+    <div class="detail-card"><div class="dc-icon">📋</div><div class="dc-title">Client Portal</div><div class="dc-body">Clean, fast client-facing portal where users can view their plans, download invoices, open tickets, and manage account details from one dashboard.</div></div>
+    <div class="detail-card"><div class="dc-icon">📈</div><div class="dc-title">Admin Analytics</div><div class="dc-body">Backend analytics panel showing active plans, revenue tracking, churn metrics, outstanding invoices, and top clients — giving CoreNode's team real business insight.</div></div>
+  </div>
+</section>
+
+<section>
+  <div class="s-label">Tech Stack</div>
+  <h2 class="s-title">Tools & <span>Technologies</span></h2>
+  <p class="s-body">Built with a modern, reliable stack chosen for speed and long-term scalability.</p>
+  <div class="tech-row">
+    <span class="tech-pill">Node.js</span>
+    <span class="tech-pill">Express.js</span>
+    <span class="tech-pill">Discord.js v14</span>
+    <span class="tech-pill">MySQL</span>
+    <span class="tech-pill">EJS Templates</span>
+    <span class="tech-pill">Stripe / PayPal</span>
+    <span class="tech-pill">WHMCS API</span>
+    <span class="tech-pill">Nginx</span>
+    <span class="tech-pill">Cloudflare</span>
+    <span class="tech-pill">PM2</span>
+    <span class="tech-pill">SSL / TLS</span>
+    <span class="tech-pill">Webhooks</span>
+  </div>
+</section>
+
+<section>
+  <div class="s-label">Build Process</div>
+  <h2 class="s-title">How We <span>Delivered It</span></h2>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content"><div class="tl-phase">Phase 01</div><div class="tl-title">Requirements & Design</div><div class="tl-desc">Sat down with CoreNode to define their exact billing flows, plan structures, Discord community size, and admin requirements before designing both systems in parallel.</div></div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content"><div class="tl-phase">Phase 02</div><div class="tl-title">Database Architecture</div><div class="tl-desc">Designed a unified database schema used by both the website and the bot — clients, plans, invoices, tickets, and transactions all in one normalized structure.</div></div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content"><div class="tl-phase">Phase 03</div><div class="tl-title">Billing Website Build</div><div class="tl-desc">Developed the full frontend and backend of the billing platform — client portal, admin panel, invoice engine, payment gateway integration, and email notifications.</div></div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content"><div class="tl-phase">Phase 04</div><div class="tl-title">Bot Development</div><div class="tl-desc">Built the Discord bot with slash commands, button interactions, ticket panels, auto-role on payment, renewal reminders, and real-time sync to the billing database.</div></div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content"><div class="tl-phase">Phase 05</div><div class="tl-title">Integration & Launch</div><div class="tl-desc">Connected both systems via shared API endpoints, tested full purchase flows, ran load tests, and deployed to production with 14-day post-launch support.</div></div></div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <h2>Need a billing system or bot?</h2>
+  <p>Leaf Studio builds tight, reliable billing platforms and Discord bots for hosting and service businesses.</p>
+  <div class="btn-row">
+    <a href="https://discord.gg/SqUWw4Cgt7" target="_blank" class="btn-g">Get a Quote</a>
+    <a href="home.html#projects" class="btn-outline">See Other Work</a>
+  </div>
+</div>
+
+<footer><span>🌿 Leaf Studio</span> — Built CoreNode's billing platform & bot. © 2026</footer>
+</body>
+</html>

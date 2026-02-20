@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FareBaren — Built by Leaf Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'DM Sans',sans-serif;}
+:root{--green:#00ff88;--blue:#3b82f6;--bg:#050710;--border:rgba(59,130,246,0.18);}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:#fff;overflow-x:hidden;}
+body::before{content:"";position:fixed;inset:0;background:linear-gradient(rgba(59,130,246,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,0.03) 1px,transparent 1px);background-size:40px 40px;z-index:-1;}
+nav{display:flex;justify-content:space-between;align-items:center;padding:18px 8%;position:fixed;width:100%;background:rgba(5,7,16,0.92);backdrop-filter:blur(16px);z-index:1000;border-bottom:1px solid rgba(59,130,246,0.15);}
+.nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.nav-logo{width:34px;height:34px;object-fit:contain;border-radius:50%;}
+.nav-brand h1{color:var(--green);font-family:'Syne',sans-serif;font-weight:800;font-size:18px;}
+.nav-back{color:#777;text-decoration:none;font-size:13px;font-weight:500;transition:color 0.2s;}
+.nav-back:hover{color:var(--blue);}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:120px 8% 80px;position:relative;}
+.back-arrow{position:absolute;top:100px;left:8%;font-size:13px;color:#555;text-decoration:none;transition:color 0.2s;}
+.back-arrow:hover{color:var(--blue);}
+.project-badge{display:inline-flex;align-items:center;gap:10px;padding:7px 20px;border:1px solid rgba(59,130,246,0.25);border-radius:30px;font-size:11px;color:var(--blue);letter-spacing:2px;margin-bottom:30px;background:rgba(59,130,246,0.05);}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(44px,8vw,86px);font-weight:800;line-height:1;margin-bottom:16px;color:#fff;}
+.hero h1 span{color:var(--blue);}
+.hero-sub{font-size:16px;color:#555;max-width:580px;line-height:1.8;margin-bottom:44px;}
+.project-logo{width:120px;height:120px;object-fit:contain;border-radius:24px;margin-bottom:28px;border:2px solid rgba(59,130,246,0.3);box-shadow:0 0 50px rgba(59,130,246,0.2);}
+.hero-stats{display:flex;gap:48px;flex-wrap:wrap;justify-content:center;padding-top:40px;border-top:1px solid rgba(59,130,246,0.12);width:100%;max-width:600px;}
+.hs{text-align:center;}
+.hs h3{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--blue);}
+.hs p{font-size:11px;color:#444;margin-top:4px;letter-spacing:2px;}
+section{padding:90px 8%;max-width:1200px;margin:0 auto;}
+.s-label{font-size:10px;letter-spacing:4px;color:var(--blue);text-transform:uppercase;font-weight:700;margin-bottom:12px;}
+.s-title{font-family:'Syne',sans-serif;font-size:clamp(26px,4vw,40px);font-weight:800;color:#fff;margin-bottom:20px;}
+.s-title span{color:var(--blue);}
+.s-body{font-size:15px;color:#555;line-height:1.9;max-width:700px;}
+.cards-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;margin-top:40px;}
+.detail-card{background:rgba(255,255,255,0.02);border:1px solid rgba(59,130,246,0.12);border-radius:20px;padding:30px 26px;transition:0.3s;}
+.detail-card:hover{border-color:rgba(59,130,246,0.3);transform:translateY(-5px);}
+.dc-icon{font-size:28px;margin-bottom:14px;}
+.dc-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:8px;}
+.dc-body{font-size:13px;color:#555;line-height:1.7;}
+.tech-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px;}
+.tech-pill{padding:6px 16px;border-radius:30px;font-size:12px;font-weight:600;background:rgba(59,130,246,0.07);border:1px solid rgba(59,130,246,0.2);color:var(--blue);}
+.timeline{display:flex;flex-direction:column;gap:0;margin-top:40px;max-width:700px;}
+.tl-item{display:flex;gap:24px;position:relative;}
+.tl-item:not(:last-child)::before{content:"";position:absolute;left:9px;top:22px;width:1px;height:100%;background:rgba(59,130,246,0.15);}
+.tl-dot{width:20px;height:20px;border-radius:50%;border:2px solid var(--blue);background:var(--bg);flex-shrink:0;margin-top:2px;}
+.tl-content{padding-bottom:36px;}
+.tl-phase{font-size:10px;color:var(--blue);letter-spacing:3px;font-weight:700;text-transform:uppercase;margin-bottom:6px;}
+.tl-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:6px;}
+.tl-desc{font-size:13px;color:#555;line-height:1.7;}
+.geo-strip{background:rgba(59,130,246,0.05);border:1px solid rgba(59,130,246,0.15);border-radius:20px;padding:28px 32px;margin-top:40px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+.geo-flag{font-size:48px;}
+.geo-info h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:#fff;margin-bottom:4px;}
+.geo-info p{font-size:13px;color:#555;line-height:1.6;}
+.cta-band{background:rgba(59,130,246,0.04);border:1px solid rgba(59,130,246,0.15);border-radius:28px;padding:60px 50px;text-align:center;margin:80px 8%;display:flex;flex-direction:column;align-items:center;gap:20px;}
+.cta-band h2{font-family:'Syne',sans-serif;font-size:30px;font-weight:800;color:#fff;}
+.cta-band p{font-size:14px;color:#555;max-width:460px;line-height:1.8;}
+.btn-b{padding:13px 36px;background:var(--blue);color:#fff;border-radius:40px;font-weight:700;font-size:14px;text-decoration:none;transition:0.3s;display:inline-block;}
+.btn-b:hover{box-shadow:0 0 35px rgba(59,130,246,0.4);transform:translateY(-2px);}
+.btn-outline{padding:13px 36px;background:transparent;color:var(--green);border:2px solid var(--green);border-radius:40px;font-weight:600;font-size:14px;text-decoration:none;transition:0.3s;display:inline-block;}
+.btn-outline:hover{background:rgba(0,255,136,0.07);}
+.btn-row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;}
+footer{text-align:center;padding:32px;border-top:1px solid rgba(59,130,246,0.12);font-size:12px;color:#333;}
+footer span{color:var(--blue);}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="home.html" class="nav-brand">
+    <img src="https://cdn.discordapp.com/attachments/929318236057657395/1474350361492848717/leaf.png?ex=69998746&is=699835c6&hm=dc7730a08c7eed9bd27417337ddd0758e2f97007a12a1f47e5fc179fffd32f45&" class="nav-logo" alt="Leaf">
+    <h1>Leaf Studio</h1>
+  </a>
+  <a href="home.html" class="nav-back">← Back to Home</a>
+</nav>
+
+<div class="hero">
+  <a href="home.html" class="back-arrow">← All Projects</a>
+  <div class="project-badge">🇩🇪 CLIENT PROJECT · EU VPS SETUP</div>
+  <img src="https://cdn.discordapp.com/attachments/1473719021466681528/1474367114377822380/7e69941ba51cf69b350eabd74801f94c.jpg?ex=699996e0&is=69984560&hm=8b5d125c08af6e5b2645ea6a4ff4038e5e3421dd4d465127a40baa233d053bad&" alt="FareBaren Logo" class="project-logo">
+  <h1>Fare<span>Baren</span></h1>
+  <p class="hero-sub">Leaf Studio configured and deployed a Germany-based VPS environment for FareBaren — EU-region infrastructure optimized for performance, compliance, and DDoS resilience.</p>
+  <div class="hero-stats">
+    <div class="hs"><h3>🇩🇪</h3><p>GERMANY NODE</p></div>
+    <div class="hs"><h3>Low</h3><p>EU LATENCY</p></div>
+    <div class="hs"><h3>Hardened</h3><p>SECURITY</p></div>
+  </div>
+</div>
+
+<section>
+  <div class="s-label">Overview</div>
+  <h2 class="s-title">What We <span>Set Up</span></h2>
+  <p class="s-body">FareBaren needed a properly configured Germany VPS environment for their EU-region hosting operations. Leaf Studio handled the full setup: from bare metal OS install and hardening, to firewall configuration, DDoS protection, panel deployment, and performance tuning. The result is a fast, secure, and stable EU node that FareBaren operates today.</p>
+
+  <div class="geo-strip">
+    <div class="geo-flag">🇩🇪</div>
+    <div class="geo-info">
+      <h3>Germany · EU-West Region</h3>
+      <p>Server location chosen for low-latency access across Germany, Netherlands, France, and Central Europe. Compliance-friendly for EU GDPR hosting requirements.</p>
+    </div>
+  </div>
+
+  <div class="cards-3" style="margin-top:30px;">
+    <div class="detail-card"><div class="dc-icon">🖥️</div><div class="dc-title">OS Setup & Hardening</div><div class="dc-body">Fresh Ubuntu install with hardened SSH configuration, disabled root login, key-based authentication, fail2ban, and automatic security updates configured.</div></div>
+    <div class="detail-card"><div class="dc-icon">🔥</div><div class="dc-title">Firewall Configuration</div><div class="dc-body">Configured UFW and iptables rules — only necessary ports exposed, all inbound filtered, outbound controlled, and rules tested end-to-end before handoff.</div></div>
+    <div class="detail-card"><div class="dc-icon">🛡️</div><div class="dc-title">DDoS Protection</div><div class="dc-body">Set up network-level DDoS mitigation with traffic scrubbing integration and rate limiting rules to absorb volumetric attacks without service interruption.</div></div>
+    <div class="detail-card"><div class="dc-icon">🎛️</div><div class="dc-title">Panel Deployment</div><div class="dc-body">Installed and configured the hosting control panel on the Germany node — Wings daemon, Nginx proxy, SSL certs, and database all production-ready.</div></div>
+    <div class="detail-card"><div class="dc-icon">⚡</div><div class="dc-title">Performance Optimization</div><div class="dc-body">Kernel tuning, swap optimization, TCP stack tweaks, and Nginx caching configured for maximum throughput and minimum latency on EU connections.</div></div>
+    <div class="detail-card"><div class="dc-icon">📊</div><div class="dc-title">Monitoring & Alerts</div><div class="dc-body">Set up uptime monitoring, disk usage alerts, CPU spike notifications, and a health dashboard so FareBaren's team always knows their node status.</div></div>
+  </div>
+</section>
+
+<section>
+  <div class="s-label">Tech Stack</div>
+  <h2 class="s-title">Tools & <span>Technologies</span></h2>
+  <p class="s-body">Industry-standard tools chosen for reliability in production EU hosting environments.</p>
+  <div class="tech-row">
+    <span class="tech-pill">Ubuntu 22.04 LTS</span>
+    <span class="tech-pill">iptables / UFW</span>
+    <span class="tech-pill">Nginx</span>
+    <span class="tech-pill">Pterodactyl Wings</span>
+    <span class="tech-pill">MySQL</span>
+    <span class="tech-pill">Fail2ban</span>
+    <span class="tech-pill">Certbot / SSL</span>
+    <span class="tech-pill">Cloudflare Proxy</span>
+    <span class="tech-pill">PM2</span>
+    <span class="tech-pill">Netdata</span>
+    <span class="tech-pill">SSH Hardening</span>
+    <span class="tech-pill">TCP Optimization</span>
+  </div>
+</section>
+
+<section>
+  <div class="s-label">Delivery Process</div>
+  <h2 class="s-title">How We <span>Did It</span></h2>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content"><div class="tl-phase">Phase 01</div><div class="tl-title">Scope & Server Access</div><div class="tl-desc">Reviewed FareBaren's requirements — server specs, panel choice, planned client load, and EU compliance needs. Got root access to the Germany VPS and assessed the baseline state.</div></div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content"><div class="tl-phase">Phase 02</div><div class="tl-title">OS Install & Hardening</div><div class="tl-desc">Clean OS install, user setup, SSH key configuration, root login disabled, automatic updates enabled, and all unnecessary services removed from the base image.</div></div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content"><div class="tl-phase">Phase 03</div><div class="tl-title">Network & Firewall</div><div class="tl-desc">Configured iptables and UFW rules, set up DDoS mitigation, tested port exposure, and validated traffic flow through all necessary services.</div></div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content"><div class="tl-phase">Phase 04</div><div class="tl-title">Panel & Services Deployment</div><div class="tl-desc">Deployed the control panel stack — Wings, Nginx reverse proxy, SSL certificates via Certbot, MySQL database, and verified all daemon connections.</div></div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-content"><div class="tl-phase">Phase 05</div><div class="tl-title">Optimization & Handoff</div><div class="tl-desc">Applied kernel and Nginx performance tuning, set up monitoring alerts, documented everything, and handed off to FareBaren with a full runbook.</div></div></div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <h2>Need a server properly set up?</h2>
+  <p>Leaf Studio configures VPS environments, hosting nodes, and server infrastructure in any region — done right the first time.</p>
+  <div class="btn-row">
+    <a href="https://discord.gg/SqUWw4Cgt7" target="_blank" class="btn-b">Get Your Server Set Up</a>
+    <a href="home.html#projects" class="btn-outline">See Other Work</a>
+  </div>
+</div>
+
+<footer><span>🇩🇪 FareBaren</span> — Germany VPS setup by Leaf Studio. © 2026</footer>
+</body>
+</html>

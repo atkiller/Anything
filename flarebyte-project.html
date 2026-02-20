@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FlareByte — Built by Leaf Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'DM Sans',sans-serif;}
+:root{--green:#00ff88;--orange:#ff6a00;--mc-green:#5aac44;--mc-dark:#1a1a1a;--bg:#0d1a0d;--border:rgba(90,172,68,0.25);}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:#fff;overflow-x:hidden;}
+
+/* Minecraft pixel grid background */
+body::before{
+  content:"";position:fixed;inset:0;
+  background:
+    linear-gradient(rgba(90,172,68,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(90,172,68,0.04) 1px,transparent 1px);
+  background-size:32px 32px;z-index:-2;
+}
+/* Dirt/grass bottom strip glow */
+body::after{
+  content:"";position:fixed;bottom:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,#5aac44,#3d8b30,#5aac44,#ff6a00,#5aac44);
+  z-index:100;
+}
+
+/* Floating pixel particles */
+.mc-particles{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;}
+.mc-p{
+  position:absolute;width:8px;height:8px;
+  background:var(--mc-green);opacity:0.08;
+  animation:float-up linear infinite;
+}
+.mc-p:nth-child(2){left:15%;animation-duration:18s;animation-delay:-4s;background:#ff6a00;width:6px;height:6px;}
+.mc-p:nth-child(3){left:35%;animation-duration:22s;animation-delay:-8s;width:10px;height:10px;}
+.mc-p:nth-child(4){left:55%;animation-duration:16s;animation-delay:-2s;background:#8B4513;width:8px;height:8px;}
+.mc-p:nth-child(5){left:75%;animation-duration:20s;animation-delay:-12s;background:#ff6a00;width:6px;height:6px;}
+.mc-p:nth-child(6){left:90%;animation-duration:14s;animation-delay:-6s;width:12px;height:12px;}
+@keyframes float-up{from{transform:translateY(100vh) rotate(0deg);opacity:0.08;}to{transform:translateY(-100px) rotate(90deg);opacity:0;}}
+
+nav{display:flex;justify-content:space-between;align-items:center;padding:18px 8%;position:fixed;width:100%;background:rgba(13,26,13,0.95);backdrop-filter:blur(16px);z-index:1000;border-bottom:1px solid rgba(90,172,68,0.2);}
+.nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.nav-logo{width:34px;height:34px;object-fit:contain;border-radius:50%;}
+.nav-brand h1{color:var(--green);font-family:'Syne',sans-serif;font-weight:800;font-size:18px;}
+.nav-back{color:#777;text-decoration:none;font-size:13px;font-weight:500;transition:color 0.2s;}
+.nav-back:hover{color:var(--mc-green);}
+
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:120px 8% 80px;position:relative;}
+.back-arrow{position:absolute;top:100px;left:8%;font-size:13px;color:#555;text-decoration:none;transition:color 0.2s;}
+.back-arrow:hover{color:var(--mc-green);}
+
+/* Minecraft-style grass block row behind hero */
+.mc-ground{
+  position:absolute;bottom:0;left:0;right:0;height:60px;
+  background:repeating-linear-gradient(
+    90deg,
+    #3d8b30 0px,#3d8b30 32px,
+    #5aac44 32px,#5aac44 64px,
+    #2d6e22 64px,#2d6e22 96px,
+    #4a9e3a 96px,#4a9e3a 128px
+  );
+  opacity:0.12;pointer-events:none;
+}
+
+.project-logo{width:130px;height:130px;object-fit:contain;border-radius:20px;margin-bottom:24px;border:3px solid rgba(90,172,68,0.4);box-shadow:0 0 60px rgba(90,172,68,0.25),0 0 20px rgba(255,106,0,0.1);image-rendering:pixelated;}
+.in-house{display:inline-block;padding:5px 16px;background:rgba(0,255,136,0.08);border:1px solid rgba(0,255,136,0.2);border-radius:4px;font-size:11px;color:var(--green);letter-spacing:2px;margin-bottom:16px;}
+.project-badge{display:inline-flex;align-items:center;gap:10px;padding:7px 20px;border:1px solid rgba(255,106,0,0.3);border-radius:4px;font-size:11px;color:var(--orange);letter-spacing:2px;margin-bottom:28px;background:rgba(255,106,0,0.05);}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(50px,9vw,90px);font-weight:800;line-height:1;margin-bottom:16px;color:#fff;}
+.hero h1 span{color:var(--orange);}
+.hero-sub{font-size:16px;color:#555;max-width:580px;line-height:1.8;margin-bottom:44px;}
+.hero-stats{display:flex;gap:48px;flex-wrap:wrap;justify-content:center;padding-top:40px;border-top:1px solid rgba(90,172,68,0.15);width:100%;max-width:600px;}
+.hs{text-align:center;}
+.hs h3{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--orange);}
+.hs p{font-size:11px;color:#444;margin-top:4px;letter-spacing:2px;}
+
+section{padding:90px 8%;max-width:1200px;margin:0 auto;}
+.s-label{font-size:10px;letter-spacing:4px;color:var(--mc-green);text-transform:uppercase;font-weight:700;margin-bottom:12px;}
+.s-title{font-family:'Syne',sans-serif;font-size:clamp(26px,4vw,40px);font-weight:800;color:#fff;margin-bottom:20px;}
+.s-title span{color:var(--orange);}
+.s-body{font-size:15px;color:#555;line-height:1.9;max-width:700px;}
+
+/* Minecraft-style card — pixel border effect */
+.cards-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;margin-top:40px;}
+.detail-card{
+  background:rgba(20,35,20,0.8);
+  border:2px solid rgba(90,172,68,0.15);
+  border-radius:8px;padding:30px 26px;transition:0.3s;
+  position:relative;
+}
+.detail-card::before{
+  content:"";position:absolute;top:-2px;left:-2px;right:-2px;bottom:-2px;
+  border-radius:8px;
+  background:linear-gradient(135deg,rgba(90,172,68,0.15),transparent,rgba(255,106,0,0.08));
+  z-index:-1;pointer-events:none;
+}
+.detail-card:hover{border-color:rgba(90,172,68,0.4);transform:translateY(-5px);box-shadow:0 10px 40px rgba(90,172,68,0.1);}
+.dc-icon{font-size:28px;margin-bottom:14px;}
+.dc-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:8px;}
+.dc-body{font-size:13px;color:#555;line-height:1.7;}
+
+.tech-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px;}
+.tech-pill{padding:6px 16px;border-radius:4px;font-size:12px;font-weight:600;background:rgba(90,172,68,0.08);border:1px solid rgba(90,172,68,0.2);color:var(--mc-green);font-family:monospace;}
+
+.links-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:30px;}
+.link-card{background:rgba(20,35,20,0.8);border:1px solid rgba(90,172,68,0.15);border-radius:8px;padding:16px 18px;text-decoration:none;transition:0.25s;display:flex;flex-direction:column;gap:4px;}
+.link-card:hover{border-color:rgba(90,172,68,0.4);transform:translateX(4px);background:rgba(90,172,68,0.05);}
+.lc-name{font-size:13px;font-weight:600;color:#ccc;}
+.lc-url{font-size:11px;color:var(--mc-green);font-family:monospace;}
+
+.cta-band{background:rgba(20,35,20,0.9);border:2px solid rgba(90,172,68,0.2);border-radius:12px;padding:60px 50px;text-align:center;margin:80px 8%;display:flex;flex-direction:column;align-items:center;gap:20px;}
+.cta-band h2{font-family:'Syne',sans-serif;font-size:30px;font-weight:800;color:#fff;}
+.cta-band p{font-size:14px;color:#555;max-width:460px;line-height:1.8;}
+.btn-o{padding:13px 36px;background:var(--orange);color:#fff;border-radius:6px;font-weight:700;font-size:14px;text-decoration:none;transition:0.3s;display:inline-block;}
+.btn-o:hover{box-shadow:0 0 35px rgba(255,106,0,0.4);transform:translateY(-2px);}
+.btn-outline{padding:13px 36px;background:transparent;color:var(--mc-green);border:2px solid var(--mc-green);border-radius:6px;font-weight:600;font-size:14px;text-decoration:none;transition:0.3s;display:inline-block;}
+.btn-outline:hover{background:rgba(90,172,68,0.08);}
+.btn-row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;}
+
+footer{text-align:center;padding:32px;border-top:1px solid rgba(90,172,68,0.15);font-size:12px;color:#333;}
+footer span{color:var(--orange);}
+</style>
+</head>
+<body>
+
+<div class="mc-particles">
+  <div class="mc-p" style="left:10%;animation-duration:20s;"></div>
+  <div class="mc-p"></div>
+  <div class="mc-p"></div>
+  <div class="mc-p"></div>
+  <div class="mc-p"></div>
+  <div class="mc-p"></div>
+</div>
+
+<nav>
+  <a href="home.html" class="nav-brand">
+    <img src="https://cdn.discordapp.com/attachments/929318236057657395/1474350361492848717/leaf.png?ex=69998746&is=699835c6&hm=dc7730a08c7eed9bd27417337ddd0758e2f97007a12a1f47e5fc179fffd32f45&" class="nav-logo" alt="Leaf">
+    <h1>Leaf Studio</h1>
+  </a>
+  <a href="home.html" class="nav-back">← Back to Home</a>
+</nav>
+
+<div class="hero">
+  <div class="mc-ground"></div>
+  <a href="home.html" class="back-arrow">← All Projects</a>
+  <div class="in-house">🌿 IN-HOUSE BRAND</div>
+  <div class="project-badge">🔥 HOSTING · WEB · BOT · BILLING</div>
+  <img src="https://cdn.discordapp.com/attachments/1473719021466681528/1474367113413132390/f0e95b16f38d8efd422533565159143d.webp?ex=699996e0&is=69984560&hm=c2e1cc6a6ba218491b92d4aa86e90ae5b588b4845880652ea30509790418975a&" alt="FlareByte Logo" class="project-logo">
+  <h1>Flare<span>Byte</span></h1>
+  <p class="hero-sub">FlareByte is our own hosting brand — built entirely by Leaf Studio from brand identity to backend infrastructure. Every line of code, every design decision, every system — ours.</p>
+  <div class="hero-stats">
+    <div class="hs"><h3>100%</h3><p>IN-HOUSE BUILT</p></div>
+    <div class="hs"><h3>Free</h3><p>TIER AVAILABLE</p></div>
+    <div class="hs"><h3>Live</h3><p>& RUNNING</p></div>
+  </div>
+</div>
+
+<section>
+  <div class="s-label">Overview</div>
+  <h2 class="s-title">Our Own <span>Brand</span></h2>
+  <p class="s-body">FlareByte isn't a client project — it's ours. We built the entire hosting brand from zero: designed the logo and identity, built the web platform, created the billing system, set up server provisioning infrastructure, developed the Discord bot, and launched the free tier offering. FlareByte runs as a live, independent hosting service operated by Leaf Studio.</p>
+  <div class="cards-3">
+    <div class="detail-card"><div class="dc-icon">🎨</div><div class="dc-title">Brand Identity</div><div class="dc-body">Designed the complete FlareByte brand — logo, color system, typography, and visual language. Built for a bold, trustworthy hosting provider image.</div></div>
+    <div class="detail-card"><div class="dc-icon">🌐</div><div class="dc-title">Web Platform</div><div class="dc-body">Full website including homepage, plan pages, client portal, and admin panel. Fast, mobile-responsive, and SEO-optimized from the ground up.</div></div>
+    <div class="detail-card"><div class="dc-icon">💳</div><div class="dc-title">Billing System</div><div class="dc-body">Complete billing infrastructure with invoice generation, plan management, payment processing, renewal automation, and client account dashboard.</div></div>
+    <div class="detail-card"><div class="dc-icon">🆓</div><div class="dc-title">Free Tier Infrastructure</div><div class="dc-body">Built a free server provisioning pipeline at free-gp.flarebyte.xyz — automated VM creation, resource caps, and account verification on demand.</div></div>
+    <div class="detail-card"><div class="dc-icon">🤖</div><div class="dc-title">Discord Bot</div><div class="dc-body">FlareByte's Discord bot handles support tickets, plan verification, renewal reminders, server status, and community engagement — fully custom built.</div></div>
+    <div class="detail-card"><div class="dc-icon">🏗️</div><div class="dc-title">Server Infrastructure</div><div class="dc-body">Set up and maintain the actual hosting nodes — VM provisioning, storage allocation, backup systems, monitoring, and uptime tracking for all plans.</div></div>
+  </div>
+</section>
+
+<section>
+  <div class="s-label">Live Links</div>
+  <h2 class="s-title">Visit <span>FlareByte</span></h2>
+  <p class="s-body">Everything is live. Every link below is a system built by Leaf Studio, running in production.</p>
+  <div class="links-grid">
+    <a href="https://flarebyte.xyz/" target="_blank" class="link-card"><span class="lc-name">🏠 Main Website</span><span class="lc-url">flarebyte.xyz</span></a>
+    <a href="https://free-gp.flarebyte.xyz/" target="_blank" class="link-card"><span class="lc-name">🆓 Free Server Provisioning</span><span class="lc-url">free-gp.flarebyte.xyz</span></a>
+    <a href="https://billing.flarebyte.xyz/" target="_blank" class="link-card"><span class="lc-name">💳 Billing Portal</span><span class="lc-url">billing.flarebyte.xyz</span></a>
+    <a href="https://discord.gg/flarebyte" target="_blank" class="link-card"><span class="lc-name">💬 Discord Community</span><span class="lc-url">discord.gg/flarebyte</span></a>
+    <a href="https://www.youtube.com/@flarebyteshostofficial" target="_blank" class="link-card"><span class="lc-name">▶️ YouTube Channel</span><span class="lc-url">@flarebyteshostofficial</span></a>
+    <a href="https://flarebyte.xyz/terms" target="_blank" class="link-card"><span class="lc-name">📋 Terms & Legal</span><span class="lc-url">flarebyte.xyz/terms</span></a>
+  </div>
+</section>
+
+<section>
+  <div class="s-label">Tech Stack</div>
+  <h2 class="s-title">Built With <span>This</span></h2>
+  <div class="tech-row">
+    <span class="tech-pill">Node.js</span>
+    <span class="tech-pill">Express</span>
+    <span class="tech-pill">Discord.js v14</span>
+    <span class="tech-pill">MySQL</span>
+    <span class="tech-pill">Pterodactyl</span>
+    <span class="tech-pill">Wings</span>
+    <span class="tech-pill">Nginx</span>
+    <span class="tech-pill">Cloudflare</span>
+    <span class="tech-pill">HTML / CSS / JS</span>
+    <span class="tech-pill">PM2</span>
+    <span class="tech-pill">SSL</span>
+    <span class="tech-pill">Stripe</span>
+  </div>
+</section>
+
+<div class="cta-band">
+  <h2>Want your own brand like this?</h2>
+  <p>Leaf Studio builds complete hosting brands — identity, web, billing, bots, and infrastructure. All from scratch.</p>
+  <div class="btn-row">
+    <a href="https://discord.gg/flarebyte" target="_blank" class="btn-o">Talk to Us</a>
+    <a href="home.html#projects" class="btn-outline">See Other Work</a>
+  </div>
+</div>
+
+<footer><span>🔥 FlareByte</span> — Built entirely by Leaf Studio. © 2026</footer>
+</body>
+</html>
