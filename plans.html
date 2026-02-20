@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leaf Studio | Plans & Pricing</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'DM Sans',sans-serif;}
+html{scroll-behavior:smooth;}
+:root{
+  --green:#00ff88;
+  --green2:#00ffaa;
+  --bg:#050b07;
+  --bg2:#08110c;
+  --card:rgba(255,255,255,0.04);
+  --border:rgba(0,255,136,0.15);
+}
+body{background:var(--bg);color:#fff;overflow-x:hidden;}
+
+/* grid bg */
+body::before{
+  content:"";position:fixed;inset:0;
+  background:linear-gradient(#00ff2208 1px,transparent 1px),linear-gradient(90deg,#00ff2208 1px,transparent 1px);
+  background-size:40px 40px;z-index:-1;
+}
+
+/* scroll progress */
+#progress{position:fixed;top:0;left:0;height:3px;background:var(--green);width:0%;z-index:2000;transition:width 0.1s;}
+
+/* ── Navbar ── */
+nav{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:18px 8%;position:fixed;width:100%;
+  background:rgba(5,11,7,0.92);backdrop-filter:blur(16px);
+  z-index:1000;border-bottom:1px solid var(--border);
+}
+.nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.nav-logo{width:36px;height:36px;object-fit:contain;border-radius:50%;}
+.nav-brand h1{color:var(--green);font-family:'Syne',sans-serif;font-weight:800;font-size:20px;letter-spacing:1px;}
+.nav-brand h1 span{display:block;font-size:10px;letter-spacing:3px;color:#555;margin-top:2px;font-weight:400;}
+.nav-back{
+  display:flex;align-items:center;gap:8px;
+  color:#aaa;text-decoration:none;font-size:13px;font-weight:600;
+  padding:8px 18px;border:1px solid rgba(255,255,255,0.08);
+  border-radius:30px;transition:0.3s;
+}
+.nav-back:hover{color:var(--green);border-color:rgba(0,255,136,0.25);}
+.nav-back svg{width:14px;height:14px;fill:currentColor;}
+
+/* ── Page Hero ── */
+.page-hero{
+  padding:140px 8% 60px;
+  text-align:center;
+  position:relative;
+}
+.page-badge{
+  display:inline-block;padding:6px 18px;border:1px solid var(--border);
+  border-radius:30px;font-size:11px;color:var(--green);letter-spacing:3px;
+  margin-bottom:24px;background:rgba(0,255,136,0.05);
+}
+.page-hero h1{
+  font-family:'Syne',sans-serif;font-size:clamp(32px,6vw,58px);
+  font-weight:800;color:#fff;line-height:1.1;margin-bottom:16px;
+}
+.page-hero h1 span{color:var(--green);}
+.page-hero p{
+  font-size:15px;color:#555;max-width:440px;margin:0 auto;line-height:1.8;
+}
+
+/* ── Plans Container ── */
+.plans-wrap{
+  padding:20px 8% 100px;
+  max-width:1200px;margin:0 auto;
+}
+
+/* category */
+.ps-cat{margin-bottom:56px;}
+.ps-cat-title{
+  font-family:'Syne',sans-serif;font-size:13px;font-weight:700;
+  color:rgba(255,255,255,0.4);letter-spacing:3.5px;text-transform:uppercase;
+  margin-bottom:20px;display:flex;align-items:center;gap:12px;
+}
+.ps-cat-title::after{
+  content:'';flex:1;height:1px;
+  background:linear-gradient(90deg,rgba(0,255,136,0.18),transparent);
+}
+.ps-cat-title .cat-emoji{font-size:18px;}
+
+/* row */
+.ps-row{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(175px,1fr));
+  gap:16px;
+}
+
+/* tile */
+.ps-tile{
+  position:relative;overflow:hidden;
+  background:rgba(255,255,255,0.02);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:20px;padding:22px 18px 20px;
+  text-decoration:none;color:inherit;display:block;
+  transition:all 0.35s cubic-bezier(.22,.6,.36,1);
+  cursor:pointer;
+}
+.ps-tile::before{
+  content:'';position:absolute;inset:0;border-radius:20px;opacity:0;
+  background:radial-gradient(ellipse at 50% 0%,rgba(0,255,136,0.09),transparent 70%);
+  transition:opacity 0.35s;pointer-events:none;
+}
+.ps-tile:hover{
+  border-color:rgba(0,255,136,0.25);
+  transform:translateY(-6px);
+  box-shadow:0 20px 48px rgba(0,0,0,0.4),0 0 0 1px rgba(0,255,136,0.07);
+}
+.ps-tile:hover::before{opacity:1;}
+
+/* free */
+.ps-free{
+  border-color:rgba(255,255,255,0.04);
+  background:rgba(255,255,255,0.015);
+}
+.ps-free .ps-price{color:#3d3d3d;font-size:13px;}
+.ps-free:hover{border-color:rgba(255,255,255,0.1);}
+
+/* pro */
+.ps-pro{
+  border-color:rgba(0,255,136,0.2);
+  background:linear-gradient(145deg,rgba(0,255,136,0.045),rgba(0,255,136,0.01));
+}
+.ps-pro:hover{
+  border-color:rgba(0,255,136,0.38);
+  box-shadow:0 22px 55px rgba(0,255,136,0.1),0 0 0 1px rgba(0,255,136,0.14);
+}
+.ps-pro-badge{
+  position:absolute;top:14px;right:14px;
+  font-size:8px;font-weight:800;letter-spacing:1.8px;
+  color:rgba(0,255,136,0.55);pointer-events:none;
+}
+
+/* price */
+.ps-price{
+  font-family:'Syne',sans-serif;font-size:18px;font-weight:800;
+  color:var(--green);margin-bottom:14px;line-height:1.2;
+}
+.ps-price span{
+  display:block;font-size:9px;color:#444;
+  font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-top:4px;
+}
+
+/* feature list */
+.ps-tile ul{list-style:none;padding:0;margin:0;}
+.ps-tile ul li{
+  font-size:12px;color:#4a4a4a;
+  padding:5px 0;line-height:1.55;
+  border-bottom:1px solid rgba(255,255,255,0.03);
+  display:flex;gap:8px;align-items:flex-start;
+  transition:color 0.3s;
+}
+.ps-tile ul li:last-child{border:none;}
+.ps-tile ul li::before{
+  content:'—';color:rgba(0,255,136,0.3);
+  flex-shrink:0;font-size:10px;margin-top:2px;
+}
+.ps-tile:hover ul li{color:#858585;}
+
+/* ── Footer ── */
+footer{
+  text-align:center;padding:36px 20px;background:var(--bg2);
+  border-top:1px solid var(--border);font-size:13px;color:#333;
+}
+footer span{color:var(--green);}
+
+/* ── Responsive ── */
+@media(max-width:768px){
+  nav{padding:14px 5%;}
+  .page-hero{padding:120px 5% 40px;}
+  .plans-wrap{padding:16px 5% 70px;}
+  .ps-row{grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:12px;}
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<!-- Navbar -->
+<nav>
+  <a href="load-1.html" class="nav-brand">
+    <img src="leaf.png" alt="Leaf" class="nav-logo">
+    <h1>Leaf Studio <span>DIGITAL ENGINEERING</span></h1>
+  </a>
+  <a href="load-1.html" class="nav-back">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+    Back to Home
+  </a>
+</nav>
+
+<!-- Page Hero -->
+<div class="page-hero">
+  <div class="page-badge">💼 PLANS & PRICING</div>
+  <h1>Choose Your <span>Plan</span></h1>
+  <p>Transparent pricing, no hidden fees. Tap any plan to reach us directly on Discord.</p>
+</div>
+
+<!-- Plans -->
+<div class="plans-wrap">
+
+  <!-- 🌐 Web Development -->
+  <div class="ps-cat">
+    <div class="ps-cat-title"><span class="cat-emoji">🌐</span> Web Development</div>
+    <div class="ps-row">
+      <a href="https://discord.gg/SqUWw4Cgt7" target="_blank" class="ps-tile ps-free">
+        <div class="ps-price">🆓 Free</div>
+        <ul>
+          <li>1 Basic Static Page</li>
+          <li>Simple Layout</li>
+          <li>No Revisions</li>
+        </ul>
+      </a>
+      <a href="https://discord.gg/SqUWw4Cgt7" target="_blank" class="ps-tile">
+        <div class="ps-price">₹99 <span>Starter</span></div>
+        <ul>
+          <li>1 Page Website</li>
+          <li>Mobile Responsive</li>
+          <li>1 Revision</li>
+        </ul>
+      </a>
+      <a href="https://discord.gg/SqUWw4Cgt7" target="_blank" class="ps-tile">
+        <div class="ps-price">₹299 <span>Basic</span></div>
+        <ul>
+          <li>2–3 Pages</li>
+          <li>Contact Section</li>
+          <li>Basic Styling</li>
+          <li>2 Revisions</li>
+        </ul>
+      </a>
+      <a href="https://discord.gg/SqUWw4Cgt7" target="_blank" class="ps-tile">
+        <div class="ps-price">₹699 <span>Advanced</span></div>
+        <ul>
+          <li>5 Pages</li>
+          <li>Animations</li>
+          <li>Contact Form</li>
+          <li>Hosting Setup</li>
+        </ul>
+      </a>
+      <a href="https://discord.gg/SqUWw4Cgt7" target="_blank" class="ps-tile ps-pro">
+        <div class="ps-pro-badge">★ PRO</div>
+        <div class="ps-price">₹999 <span>Pro</span></div>
+        <ul>
+          <li>7+ Pages</li>
+          <li>Custom Design</li>
+          <li>SEO Basics</li>
+          <li>Admin Panel (Simple)</li>
+          <li>7 Days Support</li>
+        </ul>
+      </a>
+    </div>
+  </div>
+
+  <!-- 🤖 Discord Bot -->
+  <div class="ps-cat">
+    <div class="ps-cat-title"><span class="cat-emoji">🤖</span> Discord Bot Development</div>
+    <div class="ps-row">
+      <a href="https://discord.gg/SqUWw4Cgt7" target="_blank" class="ps-tile ps-free">
+        <div class="ps-price">🆓 Free</div>
+        <ul>
+          <li>3 Commands</li>
+          <li>Prefix System</li>
+        </ul>
+      </a>
+      <a href="https://discord.gg/SqUWw4Cgt7" target="_blank" class="ps-tile">
+        <div class="ps-price">₹99 <span>Starter</span></div>
+        <ul>
+          <li>5 Custom Commands</li>
+          <li>Basic Embed Messages</li>
+        </ul>
+      </a>
+      <a href="https://discord.gg/SqUWw4Cgt7" target="_blank" class="ps-tile">
+        <div class="ps-price">₹299 <span>Basic</span></div>
+        <ul>
+          <li>Moderation Commands</li>
+          <li>Welcome System</li>
+          <li>Auto Role</li>
+        </ul>
+      </a>
+      <a href="https://discord.gg/SqUWw4Cgt7" target="_blank" class="ps-tile">
+        <div class="ps-price">₹699 <span>Advanced</span></div>
+        <ul>
+          <li>Ticket System</li>
+          <li>Logging</li>
+          <li>Reaction Roles</li>
+        </ul>
+      </a>
+      <a href="https://discord.gg/SqUWw4Cgt7" target="_blank" class="ps-tile ps-pro">
+        <div class="ps-pro-badge">★ PRO</div>
+        <div class="ps-price">₹999 <span>Pro</span></div>
+        <ul>
+          <li>Database Setup</li>
+          <li>Dashboard (Basic)</li>
+          <li>Multi-Server Support</li>
+          <li>14 Days Support</li>
+        </ul>
+      </a>
+    </div>
+  </div>
+
+  <!-- 🟩 Minecraft -->
+  <div class="ps-cat">
+    <div class="ps-cat-title"><span class="cat-emoji">🟩</span> Minecraft Development</div>
+    <div class="ps-row">
+      <a href="https://discord.gg/SqUWw4Cgt7" target="_blank" class="ps-tile ps-free">
+        <div class="ps-price">🆓 Free</div>
+        <ul>
+          <li>Plugin Suggestions</li>
+          <li>Setup Guide</li>
+        </ul>
+      </a>
+      <a href="https://discord.gg/SqUWw4Cgt7" target="_blank" class="ps-tile">
+        <div class="ps-price">₹99 <span>Starter</span></div>
+        <ul>
+          <li>5 Plugin Setup</li>
+          <li>Basic Config</li>
+        </ul>
+      </a>
+      <a href="https://discord.gg/SqUWw4Cgt7" target="_blank" class="ps-tile">
+        <div class="ps-price">₹299 <span>Basic</span></div>
+        <ul>
+          <li>Essentials + Permissions</li>
+          <li>Spawn Setup</li>
+          <li>MOTD Setup</li>
+        </ul>
+      </a>
+      <a href="https://discord.gg/SqUWw4Cgt7" target="_blank" class="ps-tile">
+        <div class="ps-price">₹699 <span>Advanced</span></div>
+        <ul>
+          <li>Economy System</li>
+          <li>Rank Setup</li>
+          <li>Anti-Cheat Setup</li>
+        </ul>
+      </a>
+      <a href="https://discord.gg/SqUWw4Cgt7" target="_blank" class="ps-tile ps-pro">
+        <div class="ps-pro-badge">★ PRO</div>
+        <div class="ps-price">₹999 <span>Pro</span></div>
+        <ul>
+          <li>Full Server Optimization</li>
+          <li>Advanced Config</li>
+          <li>Performance Boost</li>
+          <li>7 Days Support</li>
+        </ul>
+      </a>
+    </div>
+  </div>
+
+  <!-- 📱 App Development -->
+  <div class="ps-cat">
+    <div class="ps-cat-title"><span class="cat-emoji">📱</span> App Development</div>
+    <div class="ps-row">
+      <a href="https://discord.gg/SqUWw4Cgt7" target="_blank" class="ps-tile ps-free">
+        <div class="ps-price">🆓 Free</div>
+        <ul>
+          <li>Basic Static APK Template</li>
+        </ul>
+      </a>
+      <a href="https://discord.gg/SqUWw4Cgt7" target="_blank" class="ps-tile">
+        <div class="ps-price">₹99 <span>Starter</span></div>
+        <ul>
+          <li>Simple Info App</li>
+          <li>Custom App Name</li>
+        </ul>
+      </a>
+      <a href="https://discord.gg/SqUWw4Cgt7" target="_blank" class="ps-tile">
+        <div class="ps-price">₹299 <span>Basic</span></div>
+        <ul>
+          <li>Login System</li>
+          <li>Firebase Integration</li>
+        </ul>
+      </a>
+      <a href="https://discord.gg/SqUWw4Cgt7" target="_blank" class="ps-tile">
+        <div class="ps-price">₹699 <span>Advanced</span></div>
+        <ul>
+          <li>Admin Panel</li>
+          <li>Push Notifications</li>
+        </ul>
+      </a>
+      <a href="https://discord.gg/SqUWw4Cgt7" target="_blank" class="ps-tile ps-pro">
+        <div class="ps-pro-badge">★ PRO</div>
+        <div class="ps-price">₹999 <span>Pro</span></div>
+        <ul>
+          <li>API Integration</li>
+          <li>Full Custom UI</li>
+          <li>Play Store Publish Guide</li>
+        </ul>
+      </a>
+    </div>
+  </div>
+
+  <!-- ⚙️ Backend Systems -->
+  <div class="ps-cat">
+    <div class="ps-cat-title"><span class="cat-emoji">⚙️</span> Backend Systems</div>
+    <div class="ps-row">
+      <a href="https://discord.gg/SqUWw4Cgt7" target="_blank" class="ps-tile ps-free">
+        <div class="ps-price">🆓 Free</div>
+        <ul>
+          <li>Simple API Template</li>
+        </ul>
+      </a>
+      <a href="https://discord.gg/SqUWw4Cgt7" target="_blank" class="ps-tile">
+        <div class="ps-price">₹99 <span>Starter</span></div>
+        <ul>
+          <li>2–3 API Routes</li>
+        </ul>
+      </a>
+      <a href="https://discord.gg/SqUWw4Cgt7" target="_blank" class="ps-tile">
+        <div class="ps-price">₹299 <span>Basic</span></div>
+        <ul>
+          <li>Auth System</li>
+          <li>Database Setup</li>
+        </ul>
+      </a>
+      <a href="https://discord.gg/SqUWw4Cgt7" target="_blank" class="ps-tile">
+        <div class="ps-price">₹699 <span>Advanced</span></div>
+        <ul>
+          <li>Role-Based Access</li>
+          <li>CRUD System</li>
+        </ul>
+      </a>
+      <a href="https://discord.gg/SqUWw4Cgt7" target="_blank" class="ps-tile ps-pro">
+        <div class="ps-pro-badge">★ PRO</div>
+        <div class="ps-price">₹999 <span>Pro</span></div>
+        <ul>
+          <li>Secure Scalable API</li>
+          <li>Deployment Setup</li>
+          <li>7 Days Support</li>
+        </ul>
+      </a>
+    </div>
+  </div>
+
+  <!-- 🎨 UI/UX Design -->
+  <div class="ps-cat">
+    <div class="ps-cat-title"><span class="cat-emoji">🎨</span> UI/UX Design</div>
+    <div class="ps-row">
+      <a href="https://discord.gg/SqUWw4Cgt7" target="_blank" class="ps-tile ps-free">
+        <div class="ps-price">🆓 Free</div>
+        <ul>
+          <li>1 Basic UI Screen</li>
+        </ul>
+      </a>
+      <a href="https://discord.gg/SqUWw4Cgt7" target="_blank" class="ps-tile">
+        <div class="ps-price">₹99 <span>Starter</span></div>
+        <ul>
+          <li>1 Clean Landing Page</li>
+        </ul>
+      </a>
+      <a href="https://discord.gg/SqUWw4Cgt7" target="_blank" class="ps-tile">
+        <div class="ps-price">₹299 <span>Basic</span></div>
+        <ul>
+          <li>3 Screens Design</li>
+        </ul>
+      </a>
+      <a href="https://discord.gg/SqUWw4Cgt7" target="_blank" class="ps-tile">
+        <div class="ps-price">₹699 <span>Advanced</span></div>
+        <ul>
+          <li>5–7 Screens</li>
+          <li>Mobile + Desktop</li>
+        </ul>
+      </a>
+      <a href="https://discord.gg/SqUWw4Cgt7" target="_blank" class="ps-tile ps-pro">
+        <div class="ps-pro-badge">★ PRO</div>
+        <div class="ps-price">₹999 <span>Pro</span></div>
+        <ul>
+          <li>Full Product Design</li>
+          <li>Prototype + Animations</li>
+          <li>Design System</li>
+        </ul>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<footer>
+  <span>🌿</span> © 2026 <span>Leaf Studio</span>. All Rights Reserved.
+</footer>
+
+<script>
+// Scroll progress bar
+window.addEventListener("scroll", () => {
+  const s = document.documentElement.scrollTop;
+  const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  document.getElementById("progress").style.width = (s / h * 100) + "%";
+});
+</script>
+</body>
+</html>
